@@ -134,7 +134,7 @@ export default function BerthsCapacityPage() {
           </label>
           <button
             onClick={runQuery}
-            className="rounded-md bg-amber-500 px-3 py-1.5 text-sm font-medium text-slate-950 hover:bg-amber-400"
+            className="rounded-md bg-[#3D9BC4] px-3 py-1.5 text-sm font-medium text-slate-950 hover:bg-[#5BAFD4]"
           >
             Apply
           </button>
@@ -162,7 +162,7 @@ export default function BerthsCapacityPage() {
           />
         </div>
         {snapshot.bottleneck !== 'none' && (
-          <div className="mt-3 text-xs text-amber-400">
+          <div className="mt-3 text-xs text-[#3D9BC4]">
             Current bottleneck signal: {snapshot.bottleneck.replace('_', ' ')}
           </div>
         )}
@@ -276,7 +276,7 @@ function SliderRow({
       <input
         type="range" min={min} max={max} step={step} value={value}
         onChange={e => onChange(Number(e.target.value))}
-        className="w-full accent-amber-500"
+        className="w-full accent-[#3D9BC4]"
       />
     </div>
   );

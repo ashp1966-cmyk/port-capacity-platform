@@ -43,7 +43,7 @@ export default function DashboardHome() {
       </div>
 
       {snap?.bottleneck && snap.bottleneck !== 'none' && (
-        <div className="rounded-lg border border-amber-800/50 bg-amber-950/20 px-4 py-3 text-sm text-amber-300">
+        <div className="rounded-lg border border-[#3D9BC4]/30 bg-[#3D9BC4]/10 px-4 py-3 text-sm text-[#8EC5DC]">
           Current bottleneck signal: {snap.bottleneck.replace('_', ' ')}
         </div>
       )}

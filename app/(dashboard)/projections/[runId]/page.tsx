@@ -19,7 +19,7 @@ interface ForecastRow {
 
 const SCENARIO_COLOR: Record<ForecastRow['scenario'], string> = {
   optimistic: '#5DCAA5',   // teal
-  baseline: '#EF9F27',     // amber
+  baseline: '#3D9BC4',     // AUK Blue
   conservative: '#F09595', // red-200 (muted, not alarming)
 };
 
@@ -90,7 +90,7 @@ export default function ForecastRunPage() {
             onClick={() => setSelectedCommodity(c)}
             className={
               c === selectedCommodity
-                ? 'rounded-full bg-amber-500 px-3 py-1 text-xs font-medium text-slate-950'
+                ? 'rounded-full bg-[#3D9BC4] px-3 py-1 text-xs font-medium text-slate-950'
                 : 'rounded-full border border-slate-700 px-3 py-1 text-xs text-slate-400 hover:border-slate-500'
             }
           >

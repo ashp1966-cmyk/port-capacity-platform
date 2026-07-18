@@ -29,21 +29,37 @@ export function PortSessionProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const supabase = createClient();
     (async () => {
+      // Get session token from the browser client
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) { setLoading(false); return; }
-      setAccessToken(session.access_token);
-      setEmail(session.user.email ?? '');
 
-      const { data: profile } = await supabase
-        .from('profiles').select('role').eq('id', session.user.id).single();
-      if (profile) setRole(profile.role);
+      const token = session.access_token;
+      setAccessToken(token);
 
-      const { data: portRows } = await supabase.from('ports').select('id, code, name').order('name');
-      setPorts(portRows ?? []);
+      // Fetch profile and ports via server-side API routes
+      // These use the service role key server-side, bypassing any
+      // client-side RLS or NEXT_PUBLIC env var issues
+      const [meRes, portsRes] = await Promise.all([
+        fetch('/api/me', { headers: { Authorization: `Bearer ${token}` } }),
+        fetch('/api/ports'),
+      ]);
 
-      const stored = typeof window !== 'undefined' ? localStorage.getItem('selectedPortId') : null;
-      const initial = stored && portRows?.some(p => p.id === stored) ? stored : portRows?.[0]?.id ?? null;
-      setPortIdState(initial);
+      if (meRes.ok) {
+        const me = await meRes.json();
+        setEmail(me.email ?? session.user.email ?? '');
+        setRole(me.role ?? 'viewer');
+      } else {
+        setEmail(session.user.email ?? '');
+      }
+
+      if (portsRes.ok) {
+        const { ports: portRows } = await portsRes.json();
+        setPorts(portRows ?? []);
+        const stored = typeof window !== 'undefined' ? localStorage.getItem('selectedPortId') : null;
+        const initial = stored && portRows?.some((p: PortOption) => p.id === stored)
+          ? stored : portRows?.[0]?.id ?? null;
+        setPortIdState(initial);
+      }
 
       setLoading(false);
     })();
@@ -54,10 +70,6 @@ export function PortSessionProvider({ children }: { children: ReactNode }) {
     if (typeof window !== 'undefined') localStorage.setItem('selectedPortId', id);
   };
 
-  // Keep every open tab in sync: if the port is switched in one tab,
-  // storage fires here in every OTHER tab and updates their state too.
-  // Without this, a stale tab can silently commit data to the wrong
-  // port — exactly the failure mode this is closing off.
   useEffect(() => {
     const onStorage = (e: StorageEvent) => {
       if (e.key === 'selectedPortId' && e.newValue && ports.some(p => p.id === e.newValue)) {

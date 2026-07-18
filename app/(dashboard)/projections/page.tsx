@@ -72,7 +72,7 @@ export default function ProjectionsPage() {
           <button
             onClick={createRun}
             disabled={creating}
-            className="rounded-md bg-amber-500 px-4 py-1.5 text-sm font-medium text-slate-950 hover:bg-amber-400 disabled:opacity-50"
+            className="rounded-md bg-[#3D9BC4] px-4 py-1.5 text-sm font-medium text-slate-950 hover:bg-[#5BAFD4] disabled:opacity-50"
           >
             {creating ? 'Running…' : 'Run projection'}
           </button>

@@ -46,7 +46,7 @@ export default function SettingsPage() {
             onClick={() => setTab(t)}
             className={
               t === tab
-                ? 'border-b-2 border-amber-500 px-4 py-2 text-sm font-medium text-amber-500'
+                ? 'border-b-2 border-[#3D9BC4] px-4 py-2 text-sm font-medium text-[#3D9BC4]'
                 : 'border-b-2 border-transparent px-4 py-2 text-sm text-slate-400 hover:text-slate-200'
             }
           >
@@ -117,7 +117,7 @@ function PortsTab({
           <Input placeholder="Timezone" value={form.timezone} onChange={v => setForm(f => ({ ...f, timezone: v }))} />
         </div>
         <button onClick={create} disabled={saving}
-          className="mt-3 rounded-md bg-amber-500 px-4 py-1.5 text-sm font-medium text-slate-950 hover:bg-amber-400 disabled:opacity-50">
+          className="mt-3 rounded-md bg-[#3D9BC4] px-4 py-1.5 text-sm font-medium text-slate-950 hover:bg-[#5BAFD4] disabled:opacity-50">
           {saving ? 'Adding…' : 'Add port'}
         </button>
       </div>
@@ -182,7 +182,7 @@ function BerthsTab({ accessToken, portId }: { accessToken: string; portId: strin
             Anchorage
           </label>
         </div>
-        <button onClick={create} className="mt-3 rounded-md bg-amber-500 px-4 py-1.5 text-sm font-medium text-slate-950 hover:bg-amber-400">
+        <button onClick={create} className="mt-3 rounded-md bg-[#3D9BC4] px-4 py-1.5 text-sm font-medium text-slate-950 hover:bg-[#5BAFD4]">
           Add berth
         </button>
       </div>
@@ -250,7 +250,7 @@ function TugsTab({ accessToken, portId }: { accessToken: string; portId: string 
         <div className="mb-3 flex gap-2">
           <Input placeholder="Tug name" value={newTugName} onChange={setNewTugName} />
           <Input placeholder="Bollard pull (t)" value={newTugBollard} onChange={setNewTugBollard} />
-          <button onClick={addTug} className="rounded-md bg-amber-500 px-4 py-1.5 text-sm font-medium text-slate-950 hover:bg-amber-400 whitespace-nowrap">
+          <button onClick={addTug} className="rounded-md bg-[#3D9BC4] px-4 py-1.5 text-sm font-medium text-slate-950 hover:bg-[#5BAFD4] whitespace-nowrap">
             Add tug
           </button>
         </div>
@@ -283,7 +283,7 @@ function TugsTab({ accessToken, portId }: { accessToken: string; portId: string 
         </div>
         <div className="mt-3 text-sm text-slate-400">Net available: <span className="font-medium text-slate-200">{netHours.toLocaleString()}</span> hours/tug/year</div>
         <button onClick={saveAvailability} disabled={savingAvail}
-          className="mt-3 rounded-md bg-amber-500 px-4 py-1.5 text-sm font-medium text-slate-950 hover:bg-amber-400 disabled:opacity-50">
+          className="mt-3 rounded-md bg-[#3D9BC4] px-4 py-1.5 text-sm font-medium text-slate-950 hover:bg-[#5BAFD4] disabled:opacity-50">
           {savingAvail ? 'Saving…' : 'Save assumptions'}
         </button>
       </div>

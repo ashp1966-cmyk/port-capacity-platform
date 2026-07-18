@@ -97,7 +97,7 @@ export default function TugsCapacityPage({
           </label>
           <button
             onClick={runQuery}
-            className="rounded-md bg-amber-500 px-3 py-1.5 text-sm font-medium text-slate-950 hover:bg-amber-400"
+            className="rounded-md bg-[#3D9BC4] px-3 py-1.5 text-sm font-medium text-slate-950 hover:bg-[#5BAFD4]"
           >
             Apply
           </button>
@@ -128,7 +128,7 @@ export default function TugsCapacityPage({
           </div>
           <div className="mt-4 h-2 overflow-hidden rounded-full bg-slate-800">
             <div
-              className={tug.utilization > 1 ? 'h-full bg-red-500' : tug.utilization > 0.85 ? 'h-full bg-amber-500' : 'h-full bg-emerald-500'}
+              className={tug.utilization > 1 ? 'h-full bg-red-500' : tug.utilization > 0.85 ? 'h-full bg-[#3D9BC4]' : 'h-full bg-emerald-500'}
               style={{ width: `${Math.min(100, tug.utilization * 100)}%` }}
             />
           </div>

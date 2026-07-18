@@ -155,7 +155,7 @@ export default function UploadPage() {
 
       {step === 'select' && (
         <label
-          className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-700 bg-slate-900/40 px-6 py-16 text-center transition hover:border-amber-500/60"
+          className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-slate-700 bg-slate-900/40 px-6 py-16 text-center transition hover:border-[#3D9BC4]/60"
         >
           <span className="text-sm font-medium text-slate-200">Drop a .xlsx or .csv file, or click to browse</span>
           <span className="mt-1 text-xs text-slate-500">Column headers can vary — you'll map them next</span>
@@ -177,7 +177,7 @@ export default function UploadPage() {
                 <span className="text-sm text-slate-300">
                   {label}
                   {(REQUIRED_FIELDS as readonly string[]).includes(field) && (
-                    <span className="ml-1 text-amber-500">*</span>
+                    <span className="ml-1 text-[#3D9BC4]">*</span>
                   )}
                 </span>
                 <select
@@ -200,7 +200,7 @@ export default function UploadPage() {
             </button>
             <button
               onClick={runValidation}
-              className="rounded-md bg-amber-500 px-4 py-2 text-sm font-medium text-slate-950 hover:bg-amber-400"
+              className="rounded-md bg-[#3D9BC4] px-4 py-2 text-sm font-medium text-slate-950 hover:bg-[#5BAFD4]"
             >
               Validate
             </button>
@@ -258,7 +258,7 @@ function StepIndicator({ step }: { step: Step }) {
       {steps.map((s, i) => (
         <li key={s.key} className="flex items-center gap-2">
           <span className={
-            i <= activeIdx ? 'font-medium text-amber-500' : 'text-slate-600'
+            i <= activeIdx ? 'font-medium text-[#3D9BC4]' : 'text-slate-600'
           }>{s.label}</span>
           {i < steps.length - 1 && <span className="text-slate-700">→</span>}
         </li>
@@ -283,9 +283,9 @@ function ValidationReport({
 
   return (
     <div className="space-y-5">
-      <div className="rounded-lg border-2 border-amber-500 bg-amber-950/30 px-4 py-3 text-center text-sm font-medium text-amber-200">
-        This will commit to: <span className="text-amber-400">{targetPortName}</span>
-        <div className="mt-1 text-xs font-normal text-amber-300/80">
+      <div className="rounded-lg border-2 border-[#3D9BC4] bg-[#3D9BC4]/12 px-4 py-3 text-center text-sm font-medium text-[#C6DDEC]">
+        This will commit to: <span className="text-[#3D9BC4]">{targetPortName}</span>
+        <div className="mt-1 text-xs font-normal text-[#8EC5DC]/80">
           Wrong port? Switch it in the selector above before continuing — reloading this page will lose your progress.
         </div>
       </div>
@@ -298,7 +298,7 @@ function ValidationReport({
       </div>
 
       {report.unknownBerthCodes.length > 0 && (
-        <div className="rounded-lg border border-amber-800/50 bg-amber-950/20 px-4 py-3 text-sm text-amber-300">
+        <div className="rounded-lg border border-[#3D9BC4]/30 bg-[#3D9BC4]/10 px-4 py-3 text-sm text-[#8EC5DC]">
           Unrecognized berth codes: {report.unknownBerthCodes.join(', ')}. These calls will import without a
           linked berth — add them in Settings → Berths first if that's not intended.
         </div>
@@ -315,7 +315,7 @@ function ValidationReport({
           <div className="flex items-center justify-between px-4 py-2.5 text-xs text-slate-400">
             <span>{errorCount} errors · {warningCount} warnings</span>
             {report.issues.length > 8 && (
-              <button onClick={onToggleIssues} className="text-amber-500 hover:underline">
+              <button onClick={onToggleIssues} className="text-[#3D9BC4] hover:underline">
                 {expandedIssues ? 'Show less' : `Show all ${report.issues.length}`}
               </button>
             )}
@@ -326,7 +326,7 @@ function ValidationReport({
                 <span className={
                   issue.severity === 'error'
                     ? 'mt-0.5 shrink-0 rounded px-1.5 py-0.5 font-medium text-red-300 bg-red-950/50'
-                    : 'mt-0.5 shrink-0 rounded px-1.5 py-0.5 font-medium text-amber-300 bg-amber-950/50'
+                    : 'mt-0.5 shrink-0 rounded px-1.5 py-0.5 font-medium text-[#8EC5DC] bg-[#3D9BC4]/20'
                 }>{issue.severity}</span>
                 <span className="text-slate-400">
                   Row {issue.rowIndex + 1}{issue.vcn ? ` (${issue.vcn})` : ''} — {issue.field}: {issue.message}
@@ -344,7 +344,7 @@ function ValidationReport({
         <button
           onClick={onCommit}
           disabled={report.callsParsed === 0}
-          className="rounded-md bg-amber-500 px-4 py-2 text-sm font-medium text-slate-950 hover:bg-amber-400 disabled:opacity-40"
+          className="rounded-md bg-[#3D9BC4] px-4 py-2 text-sm font-medium text-slate-950 hover:bg-[#5BAFD4] disabled:opacity-40"
         >
           Commit {report.callsParsed.toLocaleString()} calls
         </button>
@@ -354,7 +354,7 @@ function ValidationReport({
 }
 
 function Stat({ label, value, tone = 'default' }: { label: string; value: number; tone?: 'default' | 'ok' | 'warn' }) {
-  const color = tone === 'warn' && value > 0 ? 'text-amber-400' : tone === 'ok' ? 'text-emerald-400' : 'text-slate-100';
+  const color = tone === 'warn' && value > 0 ? 'text-[#3D9BC4]' : tone === 'ok' ? 'text-emerald-400' : 'text-slate-100';
   return (
     <div className="rounded-lg border border-slate-800 bg-slate-900/40 px-4 py-3">
       <div className={`text-lg font-medium ${color}`}>{value.toLocaleString()}</div>
